@@ -1,7 +1,7 @@
 <template>
     <div class="post-list">
         <div v-if="postList.count">
-        <el-collapse>
+        <el-collapse v-loading="loading">
 
             <div v-for="item in postList.items" class="post-container">
                 <el-collapse-item :name="item.id">
@@ -96,6 +96,7 @@ export default {
     },
     data() {
         return {
+            loading: true,
             avatarPrefix
         }
     },
@@ -121,8 +122,10 @@ export default {
     },
     methods: {
         fetchPosts() {
+            this.loading = true
             this.$store.dispatch('wiki/getPosts', this.filterQuery).then(response => {
                 // this.total = this.postList.count
+                this.loading = false
             }).catch(e => {
                 console.log(e)
             })
@@ -172,6 +175,11 @@ export default {
   .delete:hover,
   .action-type:hover {
     color: rgb(32, 160, 255);
+  }
+
+  .action-type,
+  .delete {
+      font-size: 12px;
   }
 //   .post-title:after {
 //       content: '';

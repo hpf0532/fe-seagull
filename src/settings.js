@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Corona Ansible System',
+  title: '品茶',
 
   /**
    * @type {boolean} true | false
